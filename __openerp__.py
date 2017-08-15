@@ -19,7 +19,7 @@
         'views/jm_official_website_menu.xml',
         'security/ir.model.access.csv',
             ],
-    #11
+    #112233
     'installable': True,
     'application': True,
     'auto_install': False
