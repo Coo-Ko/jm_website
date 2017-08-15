@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <record model="ir.ui.view" id="form_jm_official_website_disedu_topimg">
+      <field name="name">远程教育顶部图片form试图</field>
+      <field name="model">jm.official.website.disedu.topimg</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <group>
+                <field name="image" widget="image" class="oe_avatar"/>
+                <field name = 'url'/>
+              </group>
+              <group>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="tree_jm_official_website_disedu_topimg" model="ir.ui.view">
+        <field name="name">远程教育顶部图片tree试图</field>
+        <field name="model">jm.official.website.disedu.topimg</field>
+        <field name="arch" type="xml">
+            <tree>
+              <field name="url"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_jm_official_website_disedu_topimg">
+      <field name="name">远程教育顶部图片</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">jm.official.website.disedu.topimg</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+
+
+    <record model="ir.ui.view" id="form_jm_official_website_disedu_school">
+      <field name="name">远程教育学校推荐form试图</field>
+      <field name="model">jm.official.website.disedu.school</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <group>
+                <field name="image" widget="image" class="oe_avatar"/>
+                <field name = 'url'/>
+              </group>
+              <group>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="tree_jm_official_website_disedu_school" model="ir.ui.view">
+        <field name="name">远程教育学校推荐tree试图</field>
+        <field name="model">jm.official.website.disedu.school</field>
+        <field name="arch" type="xml">
+            <tree>
+              <field name="url"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_jm_official_website_disedu_school">
+      <field name="name">远程教育学校推荐</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">jm.official.website.disedu.school</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+    <record model="ir.ui.view" id="form_jm_official_website_disedu_honor">
+      <field name="name">远程教育今明荣誉form试图</field>
+      <field name="model">jm.official.website.disedu.honor</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <group>
+                <field name="image" widget="image" class="oe_avatar"/>
+                <field name = 'desc'/>
+              </group>
+              <group>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="tree_jm_official_website_disedu_honor" model="ir.ui.view">
+        <field name="name">远程教育今明荣誉tree试图</field>
+        <field name="model">jm.official.website.disedu.honor</field>
+        <field name="arch" type="xml">
+            <tree>
+              <field name="desc"/>
+              <field name="image"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_jm_official_website_disedu_honor">
+      <field name="name">远程教育今明荣誉</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">jm.official.website.disedu.honor</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <record model="ir.ui.view" id="form_jm_official_website_disedu_excellent_student">
+      <field name="name">远程教育学员风采form试图</field>
+      <field name="model">jm.official.website.disedu.excellent.student</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <group>
+                <field name = 'type'/>
+                <field name="image" widget="image" class="oe_avatar"/>
+                <field name = 'desc'/>
+              </group>
+              <group>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="tree_jm_official_website_disedu_excellent_student" model="ir.ui.view">
+        <field name="name">远程教育学员风采tree试图</field>
+        <field name="model">jm.official.website.disedu.excellent.student</field>
+        <field name="arch" type="xml">
+            <tree>
+              <field name="type"/>
+              <field name="desc"/>
+              <field name="image"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_jm_official_website_disedu_excellent_student">
+      <field name="name">远程教育学员风采</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">jm.official.website.disedu.excellent.student</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+  </data>
+</openerp>

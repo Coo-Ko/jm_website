@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+{% block title %}联系我们{% endblock %}
+{% block staticfile %}
+{{ super() }}
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=1ekFwzWFLZtDKmyzHbA6HYKP4wIDa002"></script>
+<style type="text/css">
+	*{padding: 0;margin: 0;}
+	a{text-decoration: none;}
+	li{list-style-type: none;}
+	h3{padding: 0;margin: 0;background-color:#d80011;height: 100px;}
+	h4{color: #df303e;font-family: "微软雅黑";font-weight: bold;}
+	#form{border-top: 1px solid #df303e;padding: 30px 100px 0 0;}
+	.code{border-top: 1px solid #df303e;}
+	.h3{padding: 0 40px;margin: 0;font-size: 30px;color: #FFFFFF;line-height: 100px;}
+	.contact_content{
+		width:70%;
+		margin: auto;
+		margin-top: -50px;
+		position: absolute;
+		z-index: 10;
+		margin-left: 15%;
+	}
+	.wrap{
+		width: 100%;
+		padding: 40px;
+	}
+	.address{
+		height: 500px;
+		margin: 0 0 30px 0;
+	}
+	.form-control{
+		background-color: #ececec;
+		border: none;
+		border-radius: 15px;
+		height: 50px;
+	}
+
+	@media only screen and (min-width: 400px) and (max-width: 500px) {
+		.address{
+			height: 300px;
+		}
+	}
+	@media only screen and (min-width: 300px) and (max-width: 400px) {
+		.address{
+			height: 300px;
+		}
+	}
+
+</style>
+
+{% endblock %}
+{% block header %}
+ {{ super() }}
+{% endblock %}
+{% block content %}
+	<div class="jumbotron" style="padding: 0;margin: 0;margin-top: 50px;">
+		<div class="thumbnail" style="padding: 0;margin: 0;">
+			<img src="/web/static/src/jm_official_website/img/contact/contact.png" />
+		</div>
+	</div>
+	<div class="contact_content">
+		<div class="row">
+			<div class="col-sm-12">
+				<h3 class="h3">联系我们/Contact us</h3>
+			</div>
+		</div>
+		<div class="wrap">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="address" id="allmap">
+
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-8">
+					<div class="msg">
+						<h4>给我们留言</h4>
+						<form action="" method="" id="form" onsubmit="return tijiao()">
+							<div class="col-sm-12">
+								<div class="form-group">
+									<input class="form-control" placeholder="姓名  Name" id="name"/>
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<div class="form-group">
+									<input class="form-control" placeholder="电话  Tal" id="phone"/>
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<div class="form-group">
+									<textarea class="form-control" placeholder="留言  Message" id="Message" style="height: 150px;"></textarea>
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<div class="form-group">
+									<button class="btn btn-default" type="submit" style="border-radius: 15px;margin-top: 20px;height:40px;background-color: #e10203;width: 100px;color: #FFFFFF;letter-spacing: 5px;text-align: center;">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-4">
+					<div class="total">
+						<h4>今明教育集团总部</h4>
+						<div class="code">
+							<div class="thumbnail" style=" margin: 30px 0;padding: 0;border: none;">
+								<img src="/web/static/src/jm_official_website/img/contact/code.png" />
+								<div class="caption">
+									<p style="margin-top: 20px;letter-spacing: 1px;"><strong>地址：杭州市西湖区文三路553号浙江中小企业大夏22F</strong></p>
+									<p>
+										<strong>报名热线：</strong>&nbsp;<strong>0571-28006618</strong>&nbsp;&nbsp;&nbsp;<strong>0571-28006628</strong><br />
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<strong>0571-28006619</strong>&nbsp;&nbsp;&nbsp;<strong>0571-28006639</strong>
+									</p>
+									<p><strong>交通路线：乘坐15路/&nbsp;24路高峰大站车/&nbsp;24路/&nbsp;156路/&nbsp;179路/&nbsp;203路/&nbsp;270路/&nbsp;290路/&nbsp;349路到“天苑花园”公交车站</strong></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<script type="text/javascript">
+		// 百度地图API功能
+		var map = new BMap.Map("allmap");//创建百度地图实例，这里的allmap是地图容器的id
+		var point = new BMap.Point(120.12877, 30.282512);//创建一个点对象，这里的参数是地图上的经纬度
+		map.centerAndZoom(point, 20);//这里是将地图的中心移动到我们刚才创建的点；这里的12是地图的缩放界别；数值越大，地图看的越细
+		map.centerAndZoom(new BMap.Point(120.12877, 30.282512), 17);
+			var local = new BMap.LocalSearch(map, {
+				renderOptions:{map: map}
+			});
+			local.search("浙江今明教育文化发展有限公司");
+		var opts = {type: BMAP_NAVIGATION_CONTROL_SMALL}
+		var navigationControl = new BMap.NavigationControl(opts);//创建平移缩放控件
+		map.addControl(navigationControl);//添加到地图
+		var scaleControl = new BMap.ScaleControl();//这里创建比例尺控件
+		map.addControl(scaleControl);//添加到地图
+		var overviewMapControl = new BMap.OverviewMapControl();//创建缩略图控件，注意这个控件默认是在地图右下角，并且是缩着的
+		map.addControl(overviewMapControl);//添加到地图
+		var mapTypeControl = new BMap.MapTypeControl();//创建地图类型控件
+		map.addControl(mapTypeControl);
+		map.setCurrentCity('杭州')
+
+		var body = document.body
+			var form = document.getElementById('form')
+			var contact_content = document.getElementsByClassName('contact_content')[0]
+			var len = getComputedStyle(body)['width'].length
+			if(len == 5){
+				if(Number(getComputedStyle(body)['width'].slice(0,3)) < 500){
+					contact_content.style.width='100%'
+					contact_content.style.marginTop='0px'
+					contact_content.style.marginLeft='0px'
+					form.style.padding='30px 0 0 0'
+				}
+			}
+
+
+
+			function tijiao(){
+				var reg = /^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$/;
+				var name = document.getElementById('name').value
+				var phone = document.getElementById('phone').value
+				if(name.length == 0 || name == ''){
+					alert('请输入您的姓名！')
+					return false
+				}else if(!reg.test(phone)){
+					alert('请输入正确的手机号！')
+					return false
+				}else{
+					return true
+				}
+			}
+
+
+
+		browserRedirect();
+			function browserRedirect() {
+
+		        var sUserAgent = navigator.userAgent.toLowerCase();
+		        var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+		        var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+		        var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+		        var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+		        var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+		        var bIsAndroid = sUserAgent.match(/android/i) == "android";
+		        var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+		        var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+		        if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+		        	document.getElementsByClassName('wrap')[0].style.padding='0px'
+		        }
+
+		    }
+
+	</script>
+
+{% endblock %}
+{% block footer %}
+{% endblock %}

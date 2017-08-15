@@ -1,0 +1,147 @@
+<html>
+<head>
+   {% block head %}
+   <title>{% block title %}{% endblock %}</title>
+   {% endblock %}
+   <meta charset="utf-8"/>
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+   {% block staticfile %}
+   <script  src="/web/static/src/jm_official_website/dist/js/jquery-3.0.0.min.js"></script>
+   <script  src="/web/static/src/jm_official_website/dist/js/bootstrap.js"></script>
+   <script  src="/web/static/src/jm_official_website/dist/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="/web/static/src/jm_official_website/dist/css/bootstrap.css"/>
+
+   <style>
+        #footer {background: rgba(200, 200, 200, 0.1);padding:0;margin:0;}
+        .info{width: 50px;height: 100%;border: 1px solid;border-left: none;}
+			.info img{width: 100%;height: 100%;}
+            li{list-style-type: none}
+        /*html {filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);-webkit-filter: grayscale(100%);}*/
+   </style>
+
+   {% endblock %}
+</head>
+<body>
+ {% block header %}
+    <nav class="navbar navbar-default navbar-fixed-top" style="padding: 0;margin: 0;">
+        <div class="container">
+            <div class="navbar-header">
+                <img src="/web/static/src/jm_official_website/img/logo.png" class="navbar-brand" />
+                <button type="button" class="navbar-toggle" data-toggle='collapse' data-target='.collapse'>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse navbar-right">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="/homepage/">走进今明</a>
+
+                    </li>
+                    <li><a href="/recruit/">招贤纳士</a></li>
+                    <li><a href="/coopschools/">合作院校</a></li>
+                    <li><a href="/contact/">联系我们</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="code" style="width: 200px;height: 200px;position: fixed;right: 0;bottom:100px;z-index: 1000;display: none;"><img style="width: 100%;height: 100%" src="/web/static/src/jm_official_website/img/kf/code.png"/></div>
+    <div id="option" style="width: 250px;height: 50px;position: fixed;right: -200px;bottom: 50px;z-index: 1000;transition: all 1s;">
+        <div id="phone_number" style="width: 200px;height:30px;background-color:#5BC0DE;text-align: center;line-height: 30px;color: #FFFFFF;right: 0px;position: absolute;">
+            <span>0571-28006618</span>
+        </div>
+        <ul style="width: 100%;height: 100%;display: flex;justify-content: space-between;position: absolute;">
+            <li style="background: #5BC0DE;padding:5px 5px 5px 10px;color: #FFFFFF;border-top-left-radius: 10%;border-bottom-left-radius: 10%;line-height: 20px;cursor: default" class="info" id="consultation" onclick="show(this)"><span>咨询我们</span></li>
+            <li style="background: #5BC0DE;" class="info" id="qq" onclick="show(this)">
+                <a href="http://wpa.qq.com/msgrd?v=3&uin=1207619171&site=qq&menu=yes" target="_blank" >
+                  <img src="/web/static/src/jm_official_website/img/kf/qq.png"/>
+                </a>
+            </li>
+            <li style="background: #5BC0DE;" class="info" id="wx" onclick="show(this)">
+                <img src="/web/static/src/jm_official_website/img/kf/weixin.png"/>
+            </li>
+            <li style="background: #5BC0DE;" class="info" id="kf" onclick="show(this)">
+                <a onclick="window.open ('http://www2.53kf.com/webCompany.php?arg=10082383&style=1&language=zh-cn&lytype=0&charset=gbk&kflist=off&kf=&zdkf_type=1&referer=http%3A%2F%2Flocalhost%2Fjinming%2Findex.php%23%26panel1-1&keyword=&tfrom=1&tpl=crystal_blue&timeStamp=1436940338897&ucust_id=', 'newwindow', 'height=550, width=712, top=100, left=100, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no')">
+                    <img src="/web/static/src/jm_official_website/img/kf/53.png"/>
+                </a>
+            </li>
+            <li style="background: #5BC0DE;" class="info" id="phone" onclick="show(this)">
+                <img src="/web/static/src/jm_official_website/img/kf/phone.png"/>
+            </li>
+        </ul>
+    </div>
+ {% endblock %}
+ {% block content %}
+ {% endblock %}
+ {% block footer %}
+    <section id="footer">
+        <div class="container hidden-print">
+            <div class="row" style="margin-top: 18px;">
+                <div class="col-md-12  text-center">
+                   <p>浙江今明教育在线</p>
+                </div>
+                 <div class="col-md-12  text-center">
+                   <p>报名热线：0571-28006618 28006628 28006619 28006639</p>
+                </div>
+                <div class="col-md-12 text-center">
+                   <img  src="/web/static/src/jm_official_website/img/gongzhonghao.jpg" style="width:200px;height:200px"/>
+                </div>
+                <div class="col-md-12  text-center">
+                   <p>浙江今明总部地址：杭州市文三路553号浙江中小企业大厦22楼 邮编：310012</p>
+                </div>
+                <div class="col-md-12  text-center">
+                   <p>浙ICP备11066107号</p>
+                </div>
+            </div>
+            <span>Copyright © 2002-2016  浙江今明教育在线 All Right Reserved</span>
+        </div>
+    </section>
+
+    <script type="text/javascript">
+        var id;
+        var o=p=c=0;
+        var opt = document.getElementById('option');
+        var phone = document.getElementById('phone_number');
+        var code = document.getElementById('code')
+        function show(obj){
+            id = obj.id
+            switch (id){
+                case 'consultation':
+                    o++;
+                    if(o%2 == 0){
+                        code.style.display='none'
+                        phone.style.bottom='0px'
+                        opt.style.right='-200px'
+                    }else{
+                        opt.style.right='0px'
+                    }
+                    break;
+                case 'wx':
+                    c++;
+                    if(c%2 == 0){
+                        code.style.display='none'
+                    }else{
+                        code.style.display='block'
+                        phone.style.bottom='0px'
+                    }
+                    break;
+                case 'phone':
+                    p++;
+                    if(p%2 == 0){
+                        code.style.display='none'
+                        phone.style.bottom='50px'
+                    }else{
+                        phone.style.bottom='0px'
+                    }
+                    break;
+            }
+        }
+
+    </script>
+
+ {% endblock %}
+</body>
+</html>
+

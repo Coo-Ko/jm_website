@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <record model="ir.ui.view" id="form_jm_official_web_news_one">
+      <field name="name">官网总部新闻动态form试图</field>
+      <field name="model">jm.official.web.news.one</field>
+      <field name="arch" type="xml">
+        <form>
+            <group>
+              <group>
+                <field name="title" required="1"/>
+                <field name="date" required="1"/>
+                <field name="author" required="1"/>
+                <field name="source" required="1"/>
+                <field name="image" widget="image" class="oe_avatar"/>
+              </group>
+              <group>
+
+              </group>
+            </group>
+            <group>
+              <field name="content" widget="html"/>
+            </group>
+        </form>
+      </field>
+    </record>
+
+
+    <record id="tree_jm_official_web_news_one" model="ir.ui.view">
+        <field name="name">官网总部新闻动态tree试图</field>
+        <field name="model">jm.official.web.news.one</field>
+        <field name="arch" type="xml">
+            <tree>
+              <field name="title"/>
+              <field name="date"/>
+              <field name="author"/>
+              <field name="source"/>
+              <field name="image"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="action_jm_official_web_news_one">
+      <field name="name">官网总部新闻动态</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">jm.official.web.news.one</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+
+    <record model="ir.ui.view" id="form_jm_official_web_news_two">
+      <field name="name">官网分校新闻动态form试图</field>
+      <field name="model">jm.official.web.news.two</field>
+      <field name="arch" type="xml">
+        <form>
+            <group>
+              <group>
+                <field name="title" required="1"/>
+                <field name="date" required="1"/>
+                <field name="author" required="1"/>
+                <field name="source" required="1"/>
+              </group>
+              <group>
+
+              </group>
+            </group>
+            <group>
+              <field name="content" widget="html"/>
+            </group>
+        </form>
+      </field>
+    </record>
+
+
+    <record id="tree_jm_official_web_news_two" model="ir.ui.view">
+        <field name="name">官网分校新闻动态tree试图</field>
+        <field name="model">jm.official.web.news.two</field>
+        <field name="arch" type="xml">
+            <tree>
+              <field name="title"/>
+              <field name="date"/>
+              <field name="author"/>
+              <field name="source"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="action_jm_official_web_news_two">
+      <field name="name">官网分校新闻动态</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">jm.official.web.news.two</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+
+    <record model="ir.ui.view" id="form_jm_official_web_news_three">
+      <field name="name">官网任免信息动态form试图</field>
+      <field name="model">jm.official.web.news.three</field>
+      <field name="arch" type="xml">
+        <form>
+            <group>
+              <group>
+                <field name="title" required="1"/>
+                <field name="date" required="1"/>
+                <field name="author" required="1"/>
+                <field name="source" required="1"/>
+              </group>
+              <group>
+
+              </group>
+            </group>
+            <group>
+              <field name="content" widget="html"/>
+            </group>
+        </form>
+      </field>
+    </record>
+
+
+    <record id="tree_jm_official_web_news_three" model="ir.ui.view">
+        <field name="name">官网任免信息动态tree试图</field>
+        <field name="model">jm.official.web.news.three</field>
+        <field name="arch" type="xml">
+            <tree>
+              <field name="title"/>
+              <field name="date"/>
+              <field name="author"/>
+              <field name="source"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="action_jm_official_web_news_three">
+      <field name="name">官网任免信息动态</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">jm.official.web.news.three</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+  </data>
+</openerp>

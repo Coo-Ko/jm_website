@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% block title %}联系我们{% endblock %}
+{% block staticfile %}
+{{ super() }}
+<style>
+	body{margin: 0;padding: 0;}
+	p{margin: 0;padding: 0;}
+	a{color: #000000;}
+	span{cursor: default;}
+	ul{margin: 0;padding: 0;}
+	li{list-style-type: none;}
+	.news_content ul li{
+		border-bottom: 1px solid #464444;
+		padding: 30px 0;
+		margin: 0;padding:30px 0;
+		list-style-type: none;
+	}
+	.img{
+		height: 150px;
+	}
+	.img a img{
+		width: 100%;
+		height: 100%;
+	}
+	.caption{
+		height: 150px;
+		overflow: hidden;
+	}
+	.time{
+		margin-top:30px;
+		display: inline-block;
+		font-weight: bold;
+		margin-bottom: 10px;
+	}
+	.title{
+		font-weight: bold;
+		font-family: "微软雅黑";
+		font-size: 20px;
+		margin-bottom: 10px;
+	}
+	.explain{
+		display: block;
+		height: 45px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		font-family: "微软雅黑";
+		font-size: 15px;
+	}
+	.call_page{
+		text-align: center;
+		display: block;
+	}
+	.footer_text{
+		font-family: "微软雅黑";
+		line-height: 35px;
+		font-size: 20px;
+		color: #5e5e44;
+	}
+</style>
+
+{% endblock %}
+{% block header %}
+ {{ super() }}
+{% endblock %}
+{% block content %}
+	<div class="jumbotron" style="padding: 0;margin: 0; margin-top: 50px;" >
+		<div class="thumbnail" style="margin: 0 0 30px 0;padding: 0;">
+			<img src="/web/static/src/jm_official_website/img/news/{{ which }}.png" />
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="col-md-10 col-md-offset-1">
+				<p><strong>首页&nbsp;&nbsp;>&nbsp;&nbsp;总部新闻</strong></p>
+
+				<nav class="navbar" style="margin: 0;padding: 0;text-align: center;">
+					<form action="/newsList/{{ which}}/" class="navbar-form">
+						<input class="form-control" type="text" name="search" placeholder="关键字"/>
+						<button type="submit" class="btn btn-default navbar-btn" style="width: 50px;">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</form>
+				</nav>
+
+
+				<div class="news_content">
+					<ul>
+						{% for news in news_show %}
+							<li>
+								<div class="row">
+									<div class="col-sm-4">
+										{% if  news.image %}
+											<div class="img">
+												<a href="/news/{{ which }}/{{ news.id }}"><img src="data:image/jpg;base64, {{ news.image }}"/></a>
+											</div>
+										{% else %}
+										 	<div class="img">
+												<a href="/news/{{ which }}/{{ news.id }}"><img src="/web/static/src/jm_official_website/img/news/default.png"/></a>
+											</div>
+										{% endif %}
+									</div>
+									<div class="col-sm-8" style="padding: 0;margin: 0;">
+										<div class="caption">
+											<span class="time">{{ news.date }}</span>
+											<p class="title">{{ news.title | safe }}</p>
+											<span class="explain">
+												{% if news.intro %}
+												   {{ news.intro | safe }}
+												{% endif %}
+											</span>
+										</div>
+									</div>
+								</div>
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row" style="margin-top:30px;">
+			<div class="col-md-6 col-sm-12">
+				<span class="call_page">[共{{ all_page }}页][{{ all_news }}篇新闻]</span>
+			</div>
+			<div class="col-md-6 col-sm-12">
+				<div class="control" style="text-align: center;">
+					<a href="{{ pre_page }}" class="page_prev">[上一页]</a>
+					<span class="visible">[第{{ page }}页]</span>
+					<a href="{{ next_page }}" class="page_next">[下一页]</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+{% endblock %}
+{% block footer %}
+  {{ super() }}
+{% endblock %}
+
+

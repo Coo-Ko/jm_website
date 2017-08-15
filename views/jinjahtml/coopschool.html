@@ -1,0 +1,242 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block staticfile %}
+{{ super() }}
+<style>
+    *{margin: 0;padding: 0;}
+    a{text-decoration: none;}
+    li{list-style-type: none;}
+    .col-xs-12{margin: 0;padding: 0;}
+    .thumbnail{border: none;padding: 0;}
+    .nav-justified li a{
+        font-family: "微软雅黑";
+        font-weight: bold;
+        font-size: 18px;
+    }
+    .row{margin-bottom: 20px;}
+    .left_img{width: 100%;height: 300px;}
+    .right_img{width: 100%;height: 200px;}
+    .caption{
+        width: 100%;
+        height: 100px;
+        overflow: hidden;
+        line-height: 22px;
+        background-color: #ba4d31;
+        padding: 10px 15px;
+        color: white;
+        font-family: '微软雅黑';
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+    }
+    ._caption{
+        display: inline-block;
+        width: 100%;
+        overflow: hidden;
+        line-height: 22px;
+        background-color: #ba4d31;
+        padding: 10px 15px;
+        color: white;
+        font-family: '微软雅黑';
+    }
+
+    @media (max-width: 320px) {
+        .left_img{
+            height: 250px;
+        }
+        .right_img{
+            height: 150px;
+        }
+    }
+</style>
+{% endblock %}
+{% block header %}
+ {{ super() }}
+{% endblock %}
+{% block content %}
+<div class="jumbotron" style="padding: 0;margin: 0;margin-top: 50px;">
+    <div class="thumbnail">
+        <img src="/web/static/src/jm_official_website/img/cooperation.png" />
+    </div>
+</div>
+
+<ul class="nav nav-pills nav-justified">
+</ul>
+
+<div class="container" style="padding: 20px 30px;background-color: #ff995b;border-radius: 10px;">
+
+</div>
+
+
+
+
+<script>
+    var tabs = document.getElementsByClassName('nav-justified')[0]
+    var container1 = document.getElementsByClassName('container')[0]
+    var container2 = document.getElementsByClassName('container')[1]
+    tabs.style.width = getComputedStyle(container1)['width']
+    tabs.style.marginLeft='auto'
+    tabs.style.marginRight='auto'
+    tabs.style.marginTop='-20px'
+
+
+
+
+
+    var cooper = document.getElementsByClassName('nav-justified')[0]
+    var value,url;
+    $(document).ready(function(){
+                    var url='/cop/type';
+                    $.ajax({
+                     url:url,
+                     type:'get',
+                     dataType:'jsonp',
+                     jsonp:'callback',
+                     jsonpCallback:'cop_type',
+                     success:function(data){},
+                     error:function(XMLHttpRequest, textStatus, errorThrown) {
+                       alert(XMLHttpRequest.status);
+                       alert(XMLHttpRequest.readyState);
+                       alert(textStatus);
+                     }});
+                    });
+
+
+    function cop_type(result){
+        for(var i=0;i<result.subject.length;i++){
+            var li = document.createElement('li')
+            var a = document.createElement('a')
+            if(i==0){
+                li.setAttribute('class','active')
+            }
+            li.setAttribute('value',result.subject[i].value)
+            a.href='#'
+            a.innerHTML = result.subject[i].name
+            li.appendChild(a)
+            cooper.appendChild(li)
+        }
+
+        getCopType()
+        browserRedirect()
+
+    }
+
+
+    function getCopType(){
+        var con_list = cooper.children;
+        for(var i=0;i<con_list.length;i++){
+            con_list[i].onclick=function(){
+                for(var j=0;j<con_list.length;j++){
+                    con_list[j].setAttribute('class','')
+                }
+                this.setAttribute('class','active')
+                value = this.value
+                getCooperaction(value)
+            }
+        }
+
+
+        value = document.getElementsByClassName('active')[0].value
+        getCooperaction(Number(value))
+
+
+    }
+
+
+    function getCooperaction(index){
+
+        url = '/copschool/details/'+index
+
+        $(document).ready(function(){
+                    $.ajax({
+                     url:url,
+                     type:'get',
+                     dataType:'jsonp',
+                     jsonp:'callback',
+                     jsonpCallback:'cooperaction',
+                     success:function(data){},
+                     error:function(XMLHttpRequest, textStatus, errorThrown) {
+                       alert(XMLHttpRequest.status);
+                       alert(XMLHttpRequest.readyState);
+                       alert(textStatus);
+                     }});
+                    });
+
+    }
+
+
+
+    function cooperaction(result){
+        container2.innerHTML=''
+        for(var i=0;i<result.subject.length;i++){
+            var wrap = document.createElement('div')
+
+            var md4 = document.createElement('div')
+            var Limg = document.createElement('div')
+            var img1 = document.createElement('img')
+
+            var md8 = document.createElement('div')
+            var Rimg = document.createElement('div')
+            var img2 = document.createElement('img')
+            var span = document.createElement('span')
+
+
+            wrap.setAttribute('class','row')
+            md4.setAttribute('class','col-md-4 col-xs-12')
+            Limg.setAttribute('class','left_img')
+            img1.src = '' + result.subject[i].image1
+            img1.style.width='100%'
+			img1.style.height='100%'
+            Limg.appendChild(img1)
+            md4.appendChild(Limg)
+            wrap.appendChild(md4)
+            container2.appendChild(wrap)
+
+            md8.setAttribute('class','col-md-8 col-xs-12')
+            Rimg.setAttribute('class','right_img')
+            span.setAttribute('class','caption')
+            span.innerHTML = result.subject[i].desc
+            img2.src = '' + result.subject[i].image2
+            img2.style.width='100%'
+			img2.style.height='100%'
+
+            Rimg.appendChild(img2)
+            md8.appendChild(Rimg)
+            md8.appendChild(span)
+            wrap.appendChild(md8)
+            container2.appendChild(wrap)
+
+        }
+    }
+
+
+
+
+
+    /*
+     手机端判断
+     *
+     * */
+
+    function browserRedirect() {
+
+        var sUserAgent = navigator.userAgent.toLowerCase();
+        var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+        var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+        var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+        var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+        var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+        var bIsAndroid = sUserAgent.match(/android/i) == "android";
+        var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+        var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+        if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+            $('.right_img + span').prop('class','_caption')
+        }
+
+    }
+</script>
+
+{% endblock %}
+{% block footer %}
+  {{ super() }}
+{% endblock %}

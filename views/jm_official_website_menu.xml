@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <menuitem name="官网2.0" id="jm_official_website" sequence="4"/>
+
+    <menuitem name="大图管理" id="jm_official_website_bigimg_manage" parent="jm_official_website" sequence="1"/>
+    <menuitem name="顶部大图" id="jm_official_website_bigimg" parent="jm_official_website_bigimg_manage"
+              sequence="1" action="action_jm_official_website_bigimg"/>
+
+    <menuitem name="新闻管理" id="jm_official_website_news_manage" parent="jm_official_website" sequence="2"/>
+    <menuitem name="总部新闻" id="jm_official_website_news_one" parent="jm_official_website_news_manage"
+              sequence="1" action="action_jm_official_web_news_one"/>
+    <menuitem name="分校新闻" id="jm_official_website_news_two" parent="jm_official_website_news_manage"
+              sequence="2" action="action_jm_official_web_news_two"/>
+    <menuitem name="任免信息" id="jm_official_website_news_three" parent="jm_official_website_news_manage"
+              sequence="2" action="action_jm_official_web_news_three"/>
+
+    <menuitem name="企业文化" id="jm_official_website_cluture_manage" parent="jm_official_website" sequence="3"/>
+    <menuitem name="企业文化" id="jm_official_website_culture" parent="jm_official_website_cluture_manage"
+              sequence="1" action="action_jm_official_website_culture"/>
+    <menuitem name="企业文化-历史" id="jm_official_website_culture_history" parent="jm_official_website_cluture_manage"
+              sequence="2" action="action_jm_official_website_culture_history"/>
+
+    <menuitem name="分校管理" id="jm_official_website_branch_manage" parent="jm_official_website" sequence="4"/>
+    <menuitem name="分校管理" id="jm_official_website_branch" parent="jm_official_website_branch_manage"
+              sequence="1" action="action_jm_official_website_area"/>
+
+
+    <menuitem name="先进管理" id="jm_official_website_advanced_manage" parent="jm_official_website" sequence="5"/>
+    <menuitem name="先进集体" id="jm_official_website_advanced_team" parent="jm_official_website_advanced_manage"
+              sequence="1" action="action_jm_official_website_advanced_team"/>
+    <menuitem name="先进个人" id="jm_official_website_advanced_person" parent="jm_official_website_advanced_manage"
+              sequence="2" action="action_jm_official_website_advanced_person"/>
+
+
+    <menuitem name="远程教育" id="jm_official_website_disedu_manage" parent="jm_official_website" sequence="6"/>
+    <menuitem name="顶部图片" id="jm_official_website_disedu_topimg" parent="jm_official_website_disedu_manage"
+              sequence="1" action="action_jm_official_website_disedu_topimg"/>
+    <menuitem name="学校推荐" id="jm_official_website_disedu_school" parent="jm_official_website_disedu_manage"
+              sequence="2" action="action_jm_official_website_disedu_school"/>
+    <menuitem name="今明荣誉" id="jm_official_website_disedu_honor" parent="jm_official_website_disedu_manage"
+              sequence="3" action="action_jm_official_website_disedu_honor"/>
+    <menuitem name="学员风采" id="jm_official_website_disedu_excellent_student" parent="jm_official_website_disedu_manage"
+              sequence="4" action="action_jm_official_website_disedu_excellent_student"/>
+
+    <menuitem name="先进管理" id="jm_official_website_recruit_manage" parent="jm_official_website" sequence="7"/>
+    <menuitem name="招聘类别" id="jm_official_website_recruit_type" parent="jm_official_website_recruit_manage"
+              sequence="1" action="action_jm_official_website_recruit_type"/>
+    <menuitem name="招聘详情" id="jm_official_website_recruit" parent="jm_official_website_recruit_manage"
+              sequence="2" action="action_jm_official_website_recruit"/>
+
+
+    <menuitem name="合作院校" id="jm_official_website_copschool_manage" parent="jm_official_website" sequence="8"/>
+    <menuitem name="合作类型" id="jm_official_website_cop_type" parent="jm_official_website_copschool_manage"
+              sequence="1" action="action_jm_official_website_cop_type"/>
+    <menuitem name="合作学校" id="jm_official_website_copschool" parent="jm_official_website_copschool_manage"
+              sequence="2" action="action_jm_official_website_copschool"/>
+
+  </data>
+</openerp>

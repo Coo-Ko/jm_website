@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block staticfile %}
+{{ super() }}
+<style>
+    #news_content{padding: 60px 0 30px 0; width: 100%;border-bottom: 2px solid #a40000;margin: 0 auto;margin-top:10px;border-top: 2px solid #a40000;}
+    #title{width: 100%;text-align:center;}
+    #title span{font-size: 13px;}
+    #title h1{font-size: 26px; color: red;}
+    #content{width: 90%;position: relative;margin: 0 auto;}
+    #content img{display:block;margin: 0 auto;}
+    #page{width: 100%;position: relative;margin-bottom: 60px;margin-top:20px;}
+    #page a{font-size: 13px;color: #a40000;width: 100%;text-overflow:ellipsis;display: inline-block;white-space:nowrap; }
+    #previous{left: 0;}
+    #next{right: 0;}
+    .col-md-6 a{
+				width: 100%;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+</style>
+{% endblock %}
+{% block header %}
+ {{ super() }}
+{% endblock %}
+{% block content %}
+  <div class="container">
+    <div   id="news_content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div id="title">
+                    <h1 >{{ obj.title }}</h1><br />
+                    <span>{{ obj.date }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作者:{{ obj.author }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;来源:{{ obj.source }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div id="content" style="margin-top: 20px;">
+                    {{ obj.content|safe }}
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div id="page">
+
+
+            <div class="col-xs-12 col-md-6">
+                <a href={% if pre_obj %}
+                             {{ pre_obj.id }}
+                           {% else %}
+                              #
+                           {% endif %} id="previous">
+                    上一篇:{% if pre_obj %}
+                             {{ pre_obj.title }}
+                           {% else %}
+                              没有了
+                           {% endif %}
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-md-6" style="text-align: right;">
+                <a href={% if next_obj %}
+                             {{ next_obj.id }}
+                           {% else %}
+                              #
+                           {% endif %} id="next">
+                    下一篇:{% if next_obj %}
+                             {{ next_obj.title }}
+                           {% else %}
+                              没有了
+                           {% endif %}
+                </a>
+            </div>
+
+
+
+    </div>
+  </div>
+{% endblock %}
+{% block footer %}
+  {{ super() }}
+{% endblock %}

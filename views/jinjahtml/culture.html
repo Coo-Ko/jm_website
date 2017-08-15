@@ -1,0 +1,327 @@
+{% extends "base.html" %}
+{% block title %}企业文化{% endblock %}
+{% block staticfile %}
+{{ super() }}
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=1ekFwzWFLZtDKmyzHbA6HYKP4wIDa002"></script>
+<style>
+	*{padding: 0;margin: 0;}
+	a{text-decoration: none;color: #000000;}
+	span{font-family: "微软雅黑";cursor: default;}
+	h5{font-weight: bold;color: #da1020;}
+	li{list-style-type: none;}
+	hr{margin: 0;padding: 0;}
+	.jumbotron img{width: 100%;}
+	#culture_content{padding: 20px 30px 30px 30px;}
+	#to_top{
+		width:58px;
+		height:55px;
+		position:fixed;
+		bottom: 50px;
+		right: 0px;
+		background: url(/web/static/src/jm_official_website/img/culture/to_top.png)no-repeat;
+		z-index: 10;
+		display: none;
+	}
+
+	.address{
+		width: 100%;
+		height: 600px;
+	}
+	.nagative{
+		background-color:#626262;
+		width: 100%;
+		height:50px;
+		color: #fff;
+		line-height: 50px;
+		text-align: center;
+		font-size: 18px;
+	}
+	.positive{
+		background-color:#d80011;
+		width: 100%;
+		height:50px;
+		color: #fff;
+		line-height: 50px;
+		text-align: center;
+		font-size: 18px;
+	}
+
+	.year{
+		width: 100%;
+		background: url(/web/static/src/jm_official_website/img/culture/line.png)no-repeat;
+		background-position:60px;
+		padding: 0 0 10px 0;
+		margin: 0;
+		margin-top: -20px;
+	}
+	.title{
+		background-color: #d80011;
+		width: 120px;
+		font-size: 20px;
+		color: white;
+		padding: 5px 10px;
+		text-align: center;
+		border-radius: 8px;
+		margin-bottom: 30px;
+	}
+	.month{
+		display: inline-block;
+		width: 55px;
+		padding: 0 10px 0 0;
+		font-weight: bold;
+		color: #D80011;
+		text-align: right;
+	}
+	.desc{
+		margin-left:75px;
+		margin-top: -20px;
+		margin-bottom: 20px;
+		color: #D80011;
+	}
+	@media only screen and (min-width: 400px) and (max-width: 500px) {
+				.address{
+					height: 300px;
+				}
+			}
+			@media only screen and (min-width: 300px) and (max-width: 400px) {
+				.address{
+					height: 250px;
+				}
+			}
+</style>
+{% endblock %}
+{% block header %}
+ {{ super() }}
+{% endblock %}
+{% block content %}
+
+<div id="to_top"></div>
+<div class="jumbotron" style="padding: 0;margin: 0;margin-top: 50px;">
+	<img src="/web/static/src/jm_official_website/img/culture/culture.png" />
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<ul id="column">
+
+			</ul>
+		</div>
+		<div class="col-md-9" id="culture_content">
+
+		</div>
+	</div>
+</div>
+
+
+<script>
+	var li_list,value,url,text;
+	var content = $('#culture_content')[0];
+	var column = document.getElementById('column')
+	var path = '/';
+
+
+
+	$(document).ready(function(){
+		$.ajax({
+			url:path + 'culture/get/',
+			type:'get',
+			dataType:'jsonp',
+			jsonp:'callback',
+			jsonpCallback:'get_column',
+			success:function(data){},
+			error:function(XMLHttpRequest, textStatus, errorThrown) {
+				alert(XMLHttpRequest.status);
+				alert(XMLHttpRequest.readyState);
+				alert(textStatus);
+			}
+		});
+	});
+
+	function get_column(result){
+		for(var i=0;i<result.subject.length;i++){
+			var li = document.createElement('li')
+			li.setAttribute('value',result.subject[i].value)
+			var span = document.createElement('span')
+			span.innerHTML = result.subject[i].name;
+			li.appendChild(span)
+			if(i==0){
+				li.setAttribute('class','positive')
+			}else{
+				li.setAttribute('class','nagative')
+			}
+			li.setAttribute('id', result.subject[i].value)
+			column.appendChild(li)
+			column.appendChild(document.createElement('hr'))
+		}
+		var map_li = document.createElement('li')
+		map_li.setAttribute('class','nagative')
+		map_li.setAttribute('value',0)
+		var map_span = document.createElement('span')
+		map_span.innerHTML = '今明教育总部公交地图'
+		map_li.appendChild(map_span)
+		column.appendChild(map_li)
+		selected();
+	}
+
+
+
+
+	function selected(){
+		li_list = $('#column li')
+		for(var i=0;i<li_list.length;i++){
+			li_list[i].onclick=function(){
+				for(var i=0;i<li_list.length;i++){li_list[i].setAttribute('class','nagative')}
+				this.setAttribute('class','positive')
+				value = this.getAttribute('value')
+				text = this.children[0].innerHTML
+				Link();
+			}
+		}
+
+		Link();
+	}
+
+
+
+	function Link(){
+		content.innerHTML = ''
+		console.log(text)
+		if(value==undefined){
+			var first_value = $('#column li')[0].value
+			url = path + 'culture/get/'+first_value
+		}else if(text == '今明教育历史'){
+			url = path + 'culture/get/history'
+		}else{
+			url = path + 'culture/get/'+value
+		}
+		if(Number(value)==0){
+			var div = document.createElement('div')
+			div.setAttribute('class','address')
+			div.setAttribute('id','allmap')
+			content.appendChild(div)
+
+
+			var map = new BMap.Map("allmap");//创建百度地图实例，这里的allmap是地图容器的id
+			var point = new BMap.Point(120.12877, 30.282512);//创建一个点对象，这里的参数是地图上的经纬度
+			map.centerAndZoom(point, 20);//这里是将地图的中心移动到我们刚才创建的点；这里的12是地图的缩放界别；数值越大，地图看的越细
+			map.centerAndZoom(new BMap.Point(120.12877, 30.282512), 20);
+			var local = new BMap.LocalSearch(map, {
+				renderOptions:{map: map}
+			});
+			local.search("浙江今明教育文化发展有限公司");
+			var opts = {type: BMAP_NAVIGATION_CONTROL_SMALL}
+			var navigationControl = new BMap.NavigationControl(opts);//创建平移缩放控件
+			map.addControl(navigationControl);//添加到地图
+			var scaleControl = new BMap.ScaleControl();//这里创建比例尺控件
+			map.addControl(scaleControl);//添加到地图
+			var overviewMapControl = new BMap.OverviewMapControl();//创建缩略图控件，注意这个控件默认是在地图右下角，并且是缩着的
+			map.addControl(overviewMapControl);//添加到地图
+			var mapTypeControl = new BMap.MapTypeControl();//创建地图类型控件
+			map.addControl(mapTypeControl);
+			map.setCurrentCity('杭州')
+
+			var title = document.createElement('h4')
+			var path_span = document.createElement('span')
+			var phone_span = document.createElement('span')
+			title.innerHTML='交通路线：'
+			path_span.innerHTML = '乘坐15路/24路高峰大站车/24路/156路/179路/203路/270路/290路/349路到 '+'<strong>天苑花园</strong>'+' 公交车站'+'</br></br>'
+			phone_span.innerHTML = '报名热线：'+'<strong>0571-28006618  28006628  28006619  28006639</strong>'
+			content.appendChild(title)
+			content.appendChild(path_span)
+			content.appendChild(phone_span)
+		}else{
+
+			linkContent();
+		}
+	}
+
+
+	function get_con(result){
+		if(text == '今明教育历史'){
+			/*for(var i=0;i<result.length;i++){
+
+			}*/
+			for(var i=0;i<result.length;i++){
+				var year = document.createElement('div')
+				var title = document.createElement('h3')
+				title.innerHTML = result[i].year+'年度'
+				year.setAttribute('class','year')
+				title.setAttribute('class','title')
+				year.appendChild(title)
+				for(var j=0;j<result[i].event.length;j++){
+					console.log(result[i][j])
+					var month = document.createElement('span')
+					month.setAttribute('class','month')
+					month.innerHTML = result[i].event[j].month+'月'
+					var img = document.createElement('img')
+					img.src = '/web/static/src/jm_official_website/img/culture/dian.png'
+					var desc = document.createElement('div')
+					desc.setAttribute('class','desc')
+					desc.innerHTML = result[i].event[j].content
+					year.appendChild(month)
+					year.appendChild(img)
+					year.appendChild(desc)
+				}
+				content.appendChild(year)
+			}
+		}else{
+			content.innerHTML = result.content
+		}
+	}
+
+
+	function linkContent(){
+		$(document).ready(function(){
+				$.ajax({
+					url:url,
+					type:'get',
+					dataType:'jsonp',
+					jsonp:'callback',
+					jsonpCallback:'get_con',
+					success:function(data){},
+					error:function(XMLHttpRequest, textStatus, errorThrown) {
+						alert(XMLHttpRequest.status);
+						alert(XMLHttpRequest.readyState);
+						alert(textStatus);
+					}
+				});
+			});
+	}
+
+
+	browserRedirect();
+	function browserRedirect() {
+
+			window.onload = function(){
+				var oTop = document.getElementById("to_top");
+				window.onscroll = function(){
+					oTop.style.display='block'
+				}
+				oTop.onclick = function(){
+					document.documentElement.scrollTop = document.body.scrollTop =0;
+					setTimeout(function(){
+						oTop.style.display='none'
+					},50)
+				}
+			}
+
+			var sUserAgent = navigator.userAgent.toLowerCase();
+			var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+			var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+			var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+			var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+			var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+			var bIsAndroid = sUserAgent.match(/android/i) == "android";
+			var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+			var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+			if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+				content.style.padding='0px'
+
+			}
+	}
+</script>
+
+
+{% endblock %}
+{% block footer %}
+{% endblock %}

@@ -1,0 +1,285 @@
+{% extends "base.html" %}
+{% block title %}招贤纳士{% endblock %}
+{% block staticfile %}
+{{ super() }}
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<style>
+	*{padding: 0;margin: 0;}
+	a{text-decoration: none;color: #000000;}
+	h5{font-family: "微软雅黑";font-size: 15px;font-weight:bold;}
+	span{font-family: "微软雅黑";}
+	li{list-style-type: none;}
+	.max_height{height: 60px;}
+	.bottom{position: absolute;bottom: 20px;right: 30px;}
+	.jumbotron img{
+		width: 100%;
+
+	}
+	.recruit_content{
+		width:70%;
+		height: 1000px;
+		margin: auto;
+		background-color: #ffe6e6;
+		margin-top: -50px;
+		position: absolute;
+		z-index: 10;
+		margin-left: 15%;
+		padding: 30px;
+		margin-bottom: 100px;
+	}
+	.position{
+		width: 100%;
+	}
+	.recruit_person{
+		display: inline-block;
+		width:100%;
+	}
+	.recruit_person h4{
+		background-color:#cc1313;
+		color:#ffebeb;
+		text-align: center;
+		font: '微软雅黑';
+		margin: 0;
+		height: 40px;
+		letter-spacing: 10px;
+		line-height: 40px;
+		font-size: 20px;
+	}
+	.recruit_person_content{
+		background-color: #ffdbdb;
+		margin-top:5px;
+		padding: 0 10px 50px 10px;
+	}
+	.recruit_person_content p{
+		border-bottom: 1px solid #e60012;
+		margin: 0;
+		height: 50px;
+		text-align: center;
+		line-height: 50px;
+		font-size: 20px;
+		color: #000000;
+		font-weight: bold;
+	}
+	.recruit_style{
+		display: inline-block;
+		width: 100%;
+		margin-top: 30px;
+	}
+	.recruit_style h4{
+		background-color:#cc1313;
+		color:#ffebeb;
+		text-align: center;
+		font: '微软雅黑';
+		margin: 0;
+		height: 40px;
+		letter-spacing: 10px;
+		line-height: 40px;
+		font-size: 20px;
+	}
+	.recruit_style_content{
+		background-color: #ffdbdb;
+		margin-top:5px;
+		padding: 0 10px;
+		height: 150px;
+	}
+	.title{
+		background-color:#cc1313;
+		color:#ffebeb;
+		font: '微软雅黑';
+		margin: 0;
+		height: 40px;
+		letter-spacing: 5px;
+		line-height: 40px;
+		font-size: 20px;
+	}
+	.title img{
+		margin-left: 10px;
+		margin-top: -5px;
+	}
+	.position_content{
+		width: 100%;
+		padding: 0 0 50px 0;
+		margin-top: 5px;
+		background-color: #ffdbdb;
+	}
+	.position_content_icon{
+		width:95%;
+		margin: 0 auto;
+		border-bottom: 1px solid #e60012;
+		position: relative;
+		overflow: hidden;
+		padding: 0 30px;
+	}
+	.position_content_icon h4{
+		height: 60px;
+		line-height: 60px;
+		font-weight: bold;
+		font-family: "微软雅黑";
+		margin: 0;
+		padding: 0;
+	}
+	.recruit_person_content p{cursor: pointer;}
+</style>
+
+{% endblock %}
+{% block header %}
+ {{ super() }}
+{% endblock %}
+{% block content %}
+	<div class="jumbotron" style="padding: 0;margin: 0;">
+		<img src="/web/static/src/jm_official_website/img/recruit/recruit.png" />
+	</div>
+	<div class="recruit_content">
+		<div class="row">
+			<div class="col-sm-12 col-md-3">
+				<div class="recruit_person">
+					<h4>招贤纳士</h4>
+					<div class="recruit_person_content">
+
+					</div>
+				</div>
+				<div class="recruit_style">
+					<h4>应聘方式</h4>
+					<div class="recruit_style_content">
+
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12 col-md-9">
+				<div class="position">
+					<div class="title">
+						<img src="/web/static/src/jm_official_website/img/recruit/position.png" />
+						<span>招聘职位</span>
+					</div>
+					<div class="position_content">
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+
+	$(document).ready(function(){
+
+		var body = document.body
+		var recruit_content = document.getElementsByClassName('recruit_content')[0]
+		var len = getComputedStyle(body)['width'].length
+		if(len == 5){
+			if(Number(getComputedStyle(body)['width'].slice(0,3)) < 500){
+				recruit_content.style.width='100%'
+				recruit_content.style.marginTop='0px'
+				recruit_content.style.marginLeft='0px'
+			}
+		}
+
+
+	})
+
+
+
+
+	function school_recruit(index){
+		position_content.innerHTML = ''
+		$(document).ready(function(){
+			$.ajax({
+				 url:path + 'recruit/details/' + index,
+				 type:'get',
+				 dataType:'jsonp',
+				 jsonp:'callback',
+				 jsonpCallback:'recruit_sch',
+				 success:function(data){},
+				 error:function(XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest.status);
+				   alert(XMLHttpRequest.readyState);
+				   alert(textStatus);
+
+				 }});
+			});
+	}
+
+
+	var cla = 'position_content_icon ';
+	function recruit_sch(result){
+		for(var i=0;i<result.subject.length;i++){
+			var warp = document.createElement('div')
+			var h4 = document.createElement('h4')
+			var img_container = document.createElement('div')
+			var details = document.createElement('div')
+			var img = document.createElement('img')
+			img.src = '/web/static/src/jm_official_website/img/recruit/btm.png';
+
+			h4.innerHTML = result.subject[i].name;
+			img_container.setAttribute('class','bottom')
+			img_container.appendChild(img)
+			img_container.onclick=function(){
+				if($(this).children('img').prop('src').slice(-7) == 'top.png'){
+					$(this).parent().prop('class',cla+'max_height')
+					$(this).children('img').prop('src','/web/static/src/jm_official_website/img/recruit/btm.png')
+				}else{
+					$(this).parent().prop('class',cla)
+					$(this).children('img').prop('src','/web/static/src/jm_official_website/img/recruit/top.png')
+				}
+			}
+
+			details.innerHTML = result.subject[i].details;
+			details.style.padding='0 0 30px 0'
+
+			warp.setAttribute('class','position_content_icon max_height')
+			warp.appendChild(h4)
+			warp.appendChild(img_container)
+			warp.appendChild(details)
+
+
+			position_content.appendChild(warp)
+		}
+
+	}
+
+
+
+	var value;
+	var path = '/';
+	var position_content = document.getElementsByClassName('position_content')[0]
+	$(document).ready(function(){
+		 $.ajax({
+		 url:path + 'recruit/type/',
+		 type:'get',
+		 dataType:'jsonp',
+		 jsonp:'callback',
+		 jsonpCallback:'recruit_type',
+		 success:function(data){},
+		 error:function(XMLHttpRequest, textStatus, errorThrown) {
+		   alert(XMLHttpRequest.status);
+		   alert(XMLHttpRequest.readyState);
+		   alert(textStatus);
+		 }});
+	});
+
+
+	function recruit_type(result){
+		var rec_type = document.getElementsByClassName('recruit_person_content')[0]
+		for(var i=0;i<result.subject.length;i++){
+			var p = document.createElement('p')
+			var value = result.subject[i].value
+			p.setAttribute('value',value)
+			p.innerHTML = result.subject[i].name
+			rec_type.appendChild(p)
+
+			p.addEventListener('click',function(){
+				value = this.getAttribute('value')
+				school_recruit(Number(value))
+			})
+
+		}
+		value = document.getElementsByClassName('recruit_person_content')[0].children[0].getAttribute('value')
+		school_recruit(Number(value))
+
+	}
+
+	</script>
+{% endblock %}
+{% block footer %}
+{% endblock %}
+

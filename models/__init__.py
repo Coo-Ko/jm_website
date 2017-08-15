@@ -1,0 +1,8 @@
+import jm_official_website_branch
+import jm_official_website_news
+import jm_official_website_culture
+import jm_official_website_disedu
+import jm_official_website_advanced
+from . import jm_official_website_recruit
+from . import jm_official_website_bigimg
+from . import jm_official_website_copschool

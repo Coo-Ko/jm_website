@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <record model="ir.ui.view" id="form_jm_official_website_area">
+      <field name="name">官网直属院校form试图</field>
+      <field name="model">jm.official.website.area</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <group>
+                <field name = 'name' required="1"/>
+                <field name="image" widget="image" class="oe_avatar"/>
+              </group>
+              <group>
+              </group>
+            </group>
+            <group>
+                <field name = 'school'>
+                  <tree string="list" editable="bottom">
+                    <field name = 'name'/>
+                    <field name = 'webadd'/>
+                  </tree>
+                </field>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+    <record id="tree_jm_official_website_area" model="ir.ui.view">
+        <field name="name">官网直属院校tree试图</field>
+        <field name="model">jm.official.website.area</field>
+        <field name="arch" type="xml">
+            <tree>
+              <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="action_jm_official_website_area">
+      <field name="name">官网直属院校</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">jm.official.website.area</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+      
+
+  </data>
+</openerp>

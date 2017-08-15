@@ -1,0 +1,275 @@
+{% extends "base.html" %}
+{% block title %}联系我们{% endblock %}
+{% block staticfile %}
+{{ super() }}
+<link rel="stylesheet" href="/web/static/src/jm_official_website/swiper/css/swiper.css"/>
+<script src="/web/static/src/jm_official_website/swiper/js/swiper.js"></script>
+<style>
+	#carou img{width: 100%;height: 100%;}
+	a{text-decoration: none;}
+	li{list-style-type: none;}
+	hr{margin: 0;padding: 0;}
+	strong{color: #d44747;}
+	h4{display: inline-block;position: absolute;font-weight: bold;line-height: 20px;margin-left: 5px;}
+	span{font-family:"微软雅黑";}
+	.carousel-control{width: 10%;}
+	.thumbnail{border: none;margin: 0;padding: 0;}
+	.caption{font-family: "微软雅黑";font-size: 15px;letter-spacing: 2px;background-color: #eae2e3;font-weight: bold;border-radius: 10px;}
+	.title{height: 40px;margin-top: 50px;}
+	.title hr{
+		display: inline-block;
+		height: 30px;
+		border: 3px solid #e60012;
+		border-top-left-radius: 3px;
+		border-top-right-radius: 3px;
+		border-bottom-left-radius: 3px;
+		border-bottom-right-radius: 3px;
+	}
+	.yc_centent{border-top: 1px solid #e60012;padding: 20px 0 0 0;}
+	.yc_centent p{font-weight: bold;font-size: 18px;letter-spacing: 2px;text-indent: 35px;}
+
+	.hor_content{margin: 0;padding: 10px 0 0 0;border-top: 1px solid #e60012;}
+	.sch_content{margin: 0;padding: 10px 0 0 0;border-top: 1px solid #e60012;}
+	.stu_content{margin: 0;padding: 10px 0 0 0;border-top: 1px solid #e60012;padding: 10px 10px 0 10px;}
+
+	.circular{width: 120px;height: 120px;overflow: hidden;border-radius: 50%;position: relative;margin-bottom: 8px;}
+	.circular span{
+		display: inline-block;
+		position: absolute;
+		background-color: #972423;
+		color: white;
+		font-family: "微软雅黑";
+		width: 120px;
+		height: 20px;
+		text-align: center;
+		z-index: 100;
+		margin-top: -95px;
+	}
+
+	@media only screen and (device-width:320px ) {
+		.col-xs-6:nth-child(odd){margin-left:-10px;}
+		.col-xs-6{margin-bottom: 10px;}
+		.heying1{height: 150px !important;}
+	}
+	@media only screen and (device-width:375px ) {
+		.col-xs-6{margin-bottom: 10px;}
+		.heying1{height: 180px !important;}
+	}
+	@media only screen and (device-width:414px ) {
+		.col-xs-6{margin-bottom: 10px;}
+		.circular{margin-left: 10px;}
+		.heying1{height: 200px !important;}
+	}
+
+	.heying{position: relative;border: 1px solid white;display: inline-block;}
+	.heying img{width: 100%;height: 100%;}
+	.heying span{
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		left:0;
+		display: inline-block;
+		width: 100%;
+		background-color: #972423;
+		text-align: center;
+		color: white;
+		font-family:"微软雅黑";
+	}
+</style>
+{% endblock %}
+{% block header %}
+ {{ super() }}
+{% endblock %}
+{% block content %}
+
+	<div class="container">
+		<div id="carou" style="margin-top: 51px;height: 150px;overflow: hidden;">
+			<div class="swiper-container" id="swiper3">
+				<div class="swiper-wrapper" style="height: auto;">
+					{% for obj in schools %}
+						<div class="swiper-slide thumbnail">
+						  <a href="#">
+							<img src="data:image/jpg;base64, {{ obj.image }}"/>
+						  </a>
+						</div>
+					{% endfor %}
+
+				</div>
+			</div>
+			<!--<img src='data:image/jpg;base64, {{ topimg[0].image }}' id="img"/>-->
+		</div>
+
+		<div class="yuancheng">
+			<div class="col-sm-12" style="margin: 0;padding: 0;">
+				<div class="title">
+					<hr/><h4>远程教育概况</h4>
+				</div>
+				<div class="yc_centent">
+					<p>
+						远程学历教育是国家学历教育的主要形式之一。今明远程学历教育历经十数年的发展，已与国内多所高等学府建立良好的合作
+						关系，形成了独具特色的服务体系，构建了遍及华东/华南地区的学习中心网络，更好地方便学员实现就地读书、就地学习、
+						就地拿学历。
+					</p>
+					<div class="thumbnail">
+						<img src="/web/static/src/jm_official_website/img/disedu/education.png"/>
+						<div class="caption" style="padding: 15px 30px;">
+							※为解决成人学习进修，学历提升的问题，我国于1998年开设远程学历教育，毕业生受国家认可，
+							与普通高校毕业生享同等待遇，<strong>学信网可查，终身有效</strong>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="honor" style="margin-bottom: 50px;">
+			<div class="col-sm-12" style="margin: 0;padding: 0;">
+				<div class="title">
+					<hr/><h4>今明荣誉</h4>
+				</div>
+
+				<div class="hor_content">
+
+					<div class="swiper-container" id="swiper1">
+						<div class="swiper-wrapper" style="height: auto;">
+							{% for obj in honor %}
+								<div class="swiper-slide thumbnail">
+									<img src="data:image/jpg;base64, {{ obj.image }}"/>
+								</div>
+							{% endfor %}
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
+		<div class="school">
+			<div class="col-sm-12" style="margin: 0;padding: 0;">
+				<div class="title">
+					<hr/><h4>学校推荐</h4>
+				</div>
+
+				<div class="sch_content">
+
+					<div class="swiper-container" id="swiper2">
+						<div class="swiper-wrapper" style="height: auto;">
+							{% for obj in schools %}
+								<div class="swiper-slide thumbnail">
+								  <a href="#">
+									<img src="data:image/jpg;base64, {{ obj.image }}"/>
+								  </a>
+								</div>
+							{% endfor %}
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="student">
+			<div class="col-sm-12" style="margin: 0;padding: 0;">
+				<div class="title">
+					<hr/><h4>学员风采</h4>
+				</div>
+
+
+				<div class="stu_content">
+					<div class="row" style="margin: 0;padding: 0;">
+						{% for stu in excellent_stu %}
+							<div class="col-md-2 col-sm-4 col-xs-6">
+								<div class="circular">
+									<div class="thumbnail">
+										<img src="data:image/jpg;base64, {{ stu.image }}"/>
+									</div>
+									<span>{{ stu.desc }}</span>
+
+								</div>
+							</div>
+						{% endfor %}
+
+					</div>
+
+					<div class="row" style="margin-top: 10px;">
+
+						<div class="col-md-6 col-sm-12" style="padding: 0;">
+							<div class="heying heying1" style="width: 100%;height: 285px;">
+								<img src="data:image/jpg;base64, {{ excellent_stu_group[0].image }}"/>
+								<span>{{ excellent_stu_group[0].desc }}</span>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-sm-12" style="padding: 0;">
+							<div class="heying" style="width: 100%;height: 142px;">
+								<img src="data:image/jpg;base64, {{ excellent_stu_group[1].image }}"/>
+								<span>{{ excellent_stu_group[1].desc }}</span>
+							</div>
+							<div class="heying" style="width: 100%;height: 142px;">
+								<img src="data:image/jpg;base64, {{ excellent_stu_group[2].image }}"/>
+								<span>{{ excellent_stu_group[2].desc }}</span>
+							</div>
+						</div>
+
+						<div class="col-md-3 col-sm-12" style="padding: 0;margin: 0;">
+							<div class="heying" style="width:50%;height: 100px;">
+								<img src="data:image/jpg;base64, {{ excellent_stu_group[3].image }}"/>
+								<span>{{ excellent_stu_group[3].desc }}</span>
+							</div>
+							<div class="heying" style="width:50%;height: 100px;margin-left: -4px;">
+								<img src="data:image/jpg;base64, {{ excellent_stu_group[4].image }}"/>
+								<span>{{ excellent_stu_group[4].desc }}</span>
+							</div>
+							<div class="heying" style="width: 100%;height: 185px;">
+								<img src="data:image/jpg;base64, {{ excellent_stu_group[5].image }}"/>
+								<span>{{ excellent_stu_group[5].desc }}</span>
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+
+	<script src="/web/static/src/jm_official_website/js/education.js"></script>
+	<script>
+
+
+
+		var mySwiper = new Swiper('#swiper1',{
+			autoplay:3000,
+			effect :'fade',
+			loop:true,
+			autoplayDisableOnInteraction:false
+		});
+
+
+		var mySwiper2 = new Swiper('#swiper2',{
+			autoplay:2000,
+			effect :'slide',
+			loop:true,
+			autoplayDisableOnInteraction:false,
+
+		});
+
+		var mySwiper3 = new Swiper('#swiper3',{
+			autoplay:2500,
+			effect :'slide',
+			loop:true,
+			autoplayDisableOnInteraction:false,
+
+		});
+
+
+	</script>
+
+{% endblock %}
+{% block footer %}
+{% endblock %}
