@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+﻿#-*- coding: utf-8 -*-
 {
     'name' : '今明官网',
     'version' : '1.0',
@@ -19,6 +19,7 @@
         'views/jm_official_website_menu.xml',
         'security/ir.model.access.csv',
             ],
+    #11
     'installable': True,
     'application': True,
     'auto_install': False
